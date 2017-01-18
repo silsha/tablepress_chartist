@@ -39,16 +39,17 @@ class TablePress_Chartist {
 	 * @var array
 	 */
 	protected static $shortcode_attributes = array(
-		'low'          => null,
-		'high'         => null,
-		'width'        => '',
-		'height'       => '',
-		'chart'        => 'line',
-		'showline'     => true,
-		'showarea'     => false,
-		'showpoint'    => true,
-		'linesmooth'   => true,
-		'aspect_ratio' => '3:4',
+		'low'          	=> null,
+		'high'         	=> null,
+		'width'        	=> '',
+		'height'       	=> '',
+		'chart'        	=> 'line',
+		'showline'     	=> true,
+		'showarea'     	=> false,
+		'showpoint'    	=> true,
+		'linesmooth'   	=> true,
+		'aspect_ratio' 	=> '3:4',
+		'horizontal' 	=> false
 	);
 
 	/**
@@ -58,12 +59,13 @@ class TablePress_Chartist {
 	 * @var array
 	 */
 	protected static $attribute_to_js_mapping = array(
-		'low'        => 'low',
-		'high'       => 'high',
-		'showline'   => 'showLine',
-		'showarea'   => 'showArea',
-		'showpoint'  => 'showPoint',
-		'linesmooth' => 'lineSmooth',
+		'low'        	=> 'low',
+		'high'       	=> 'high',
+		'showline'   	=> 'showLine',
+		'showarea'   	=> 'showArea',
+		'showpoint'  	=> 'showPoint',
+		'linesmooth' 	=> 'lineSmooth',
+		'horizontal' 	=> 'horizontalBars'
 	);
 
 	/**
