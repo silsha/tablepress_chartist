@@ -39,8 +39,8 @@ class TablePress_Chartist {
 	 * @var array
 	 */
 	protected static $shortcode_attributes = array(
-		'low'          => '',
-		'high'         => '',
+		'low'          => null,
+		'high'         => null,
 		'width'        => '',
 		'height'       => '',
 		'chart'        => 'line',
