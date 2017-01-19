@@ -49,7 +49,9 @@ class TablePress_Chartist {
 		'showpoint'    	=> true,
 		'linesmooth'   	=> true,
 		'aspect_ratio' 	=> '3:4',
-		'horizontal' 	=> false
+		'horizontal' 	=> false,
+		'stack'			=> false,
+		'animation'		=> false
 	);
 
 	/**
@@ -65,7 +67,8 @@ class TablePress_Chartist {
 		'showarea'   	=> 'showArea',
 		'showpoint'  	=> 'showPoint',
 		'linesmooth' 	=> 'lineSmooth',
-		'horizontal' 	=> 'horizontalBars'
+		'horizontal' 	=> 'horizontalBars',
+		'stack'			=> 'stackBars'
 	);
 
 	/**
@@ -204,6 +207,36 @@ class TablePress_Chartist {
 				break;
 		}
 
+		// animation frame
+		$animation_script = <<<JS
+chart.on('draw', function(data) {
+	%s
+});
+JS;
+		// Setup animation for chart
+		switch ( strtolower( $render_options[ 'chartist_animation' ] ) ) {
+			case 'buildup':
+				$animation = <<<JS
+if(data.type === 'line' || data.type === 'area') {
+	data.element.animate({
+		d: {
+			begin: 1500 * data.index,
+			dur: 1500,
+			from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+			to: data.path.clone().stringify(),
+			easing: Chartist.Svg.Easing.easeOutQuint
+		}
+	});
+}
+JS;
+				$animation_script = sprintf($animation_script, $animation);
+				break;
+
+			default:
+				$animation_script = '';
+		}
+
+
 		// Convert all numeric table cell values to numeric variables, so that they show up as numbers in the JSON encoded string, as ChartistJS requires that.
 		foreach ( $table['data'] as $row_idx => $row ) {
 			foreach ( $row as $col_idx => $cell ) {
@@ -252,7 +285,9 @@ jQuery(document).ready(function(){
 	var	data = {$json_chart_data},
 		options = {$json_chart_options},
 		sum = function( a, b ) { return a + b; };
-	new Chartist.{$chart}( '#chartist-{$render_options['html_id']}', data, options );
+	var chart = new Chartist.{$chart}( '#chartist-{$render_options['html_id']}', data, options );
+
+	{$animation_script}
 });
 </script>
 JS;
