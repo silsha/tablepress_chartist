@@ -1,11 +1,12 @@
 === TablePress Extension: Chartist ===
-Contributors: PerS
+Contributors: PerS, silsha
 Donate link: http://soderlind.no/donate/
 Tags: tablepress, table, chart, responsive
-Requires at least: 3.9
-Tested up to: 4.0
-Stable tag: 0.6
+Requires at least: 4.3
+Tested up to: 4.7.1
+Stable tag: 0.7
 License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Create a responsive chart based on the data in a TablePress table.
 
@@ -25,9 +26,11 @@ Optional parameters:
 * Set chart y high: `high=10` (default: table high)
 * Enable/disable smooth line: `linesmooth=true` (default: true)
 * Enable/disable line points: `showpoint=true` (default: true)
+* Enable/disable horizontal bars: `horizontal=true` (default: false)
+* Enable/disable stacked bars: `stack=true` (default: false)
 * Set chart aspect ratio: `aspect_ratio=3:4` (default: 3:4) Alternatives: 1, 15:16, 8:9, 5:6, 4:5, 3:4, 2:3, 5:8, 1:1.618, 3:5, 9:16, 8:15, 1:2, 2:5, 3:8, 1:3, or 1:4
 * Select chart type: `chart=bar` (default: line) Alternatives: line, bar, pie, donut or percent.
-
+* Use animations (not available for all chart types): `animation=buildup` (default: false)
 If the "Table Head Row" option is enabled for the table, the Extension will use the head row data for the chart labels.
 The other rows will be shown as lines or bars. Pie or percent charts will only use the first data row. Percent charts will ignore the header row.
 
@@ -80,6 +83,11 @@ Prerequisite (install first): The [TablePress](https://wordpress.org/plugins/tab
 9. `[table-chart id=1 chart=percent /]`
 
 == Changelog ==
+= 0.7 =
+* Added support for horizontal bars (`horizontal=true`)
+* Added support for stacked bars (`stack=true`)
+* Added simple animation for line charts
+* Merged “Addition of donut chart type #1” by [shaharhesse](https://github.com/shaharhesse)
 = 0.6 =
 Switch to `[table-chart]` Shortcode.
 = 0.5.1 =

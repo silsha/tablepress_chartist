@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: TablePress Extension: Chartist
-Plugin URI: https://github.com/soderlind/tablepress_chartist
+Plugin URI: https://github.com/silsha/tablepress_chartist
 Description: Extension for TablePress to create a responsive chart based on the data in a TablePress table.
-Version: 0.6
-Author: Per Soderlind
-Author URI: http://soderlind.no/
+Version: 0.7
+Author: Silsha Fux
+Author URI: https://silsha.me
 License: GPL
 */
 
@@ -30,7 +30,7 @@ class TablePress_Chartist {
 	 * @since 0.1
 	 * @var string
 	 */
-	protected static $version = '0.6';
+	protected static $version = '0.7';
 
 	/**
 	 * Available Shortcode attributes, without the `chartist_` prefix.
