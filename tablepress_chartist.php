@@ -232,6 +232,33 @@ if(data.type === 'line' || data.type === 'area') {
 		}
 	});
 }
+if (data.type === 'bar') {
+	data.element.attr({
+		style: 'stroke-width: 0px'
+	});
+	var strokeWidth = 10;
+
+	for (var s = 0; s < data.series.length; ++s) {
+		if (data.seriesIndex === s) {
+			data.element.animate({
+				y2:             {
+					begin:  s * 1500,
+					dur:    1500,
+					from:   data.y1,
+					to:     data.y2,
+					easing: Chartist.Svg.Easing.easeOutSine
+				},
+				'stroke-width': {
+					begin: s * 1500,
+					dur:   1,
+					from:  0,
+					to:    strokeWidth,
+					fill:  'freeze'
+				}
+			}, false);
+		}
+	}
+}
 JS;
 				$animation_script = sprintf($animation_script, $animation);
 				break;
