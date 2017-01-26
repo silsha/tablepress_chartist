@@ -190,7 +190,7 @@ class TablePress_Chartist {
 				break;
 			case 'pie':
 				$chart = 'Pie';
-				$json_chart_options[] = 'labelInterpolationFnc: function( value ) { return value[0]; }';
+				$json_chart_options[] = 'labelInterpolationFnc: function( value ) { return value; }';
 				break;
 			case 'donut':
 				$chart = 'Pie';
@@ -200,6 +200,10 @@ class TablePress_Chartist {
 			case 'percent':
 				$chart = 'Pie';
 				$json_chart_options[] = "labelInterpolationFnc: function( value ) { return Math.round( value / data.series.reduce( sum ) * 100 ) + '%'; }";
+				break;
+			case 'piepercent':
+				$chart = 'Pie';
+				$json_chart_options[] = "labelInterpolationFnc: function( value, index ) { return value + ' (' + Math.round(data.series[index] / data.series.reduce( sum ) * 100) + '%)';}";
 				break;
 			case 'line':
 			default:
@@ -261,6 +265,7 @@ JS;
 		if ( $render_options['table_head'] && 'percent' !== $render_options[ 'chartist_chart' ] ) {
 			$json_chart_data['labels'] = $json_labels;
 		}
+
 		$json_chart_data = json_encode( (object) $json_chart_data );
 
 		// Add other chart options.
