@@ -39,19 +39,21 @@ class TablePress_Chartist {
 	 * @var array
 	 */
 	protected static $shortcode_attributes = array(
-		'low'          	=> null,
-		'high'         	=> null,
-		'width'        	=> '',
-		'height'       	=> '',
-		'chart'        	=> 'line',
-		'showline'     	=> true,
-		'showarea'     	=> false,
-		'showpoint'    	=> true,
-		'linesmooth'   	=> true,
-		'aspect_ratio' 	=> '3:4',
-		'horizontal' 	=> false,
+		'low'			=> null,
+		'high'			=> null,
+		'width'			=> '',
+		'height'		=> '',
+		'chart'			=> 'line',
+		'showline'		=> true,
+		'showarea'		=> false,
+		'showpoint'		=> true,
+		'linesmooth'	=> true,
+		'aspect_ratio'	=> '3:4',
+		'horizontal'	=> false,
 		'stack'			=> false,
-		'animation'		=> false
+		'animation'		=> false,
+		'label_offset'	=> false,
+		'chart_padding'	=> false
 	);
 
 	/**
@@ -61,14 +63,16 @@ class TablePress_Chartist {
 	 * @var array
 	 */
 	protected static $attribute_to_js_mapping = array(
-		'low'        	=> 'low',
-		'high'       	=> 'high',
-		'showline'   	=> 'showLine',
-		'showarea'   	=> 'showArea',
-		'showpoint'  	=> 'showPoint',
-		'linesmooth' 	=> 'lineSmooth',
-		'horizontal' 	=> 'horizontalBars',
-		'stack'			=> 'stackBars'
+		'low'			=> 'low',
+		'high'			=> 'high',
+		'showline'		=> 'showLine',
+		'showarea'		=> 'showArea',
+		'showpoint'		=> 'showPoint',
+		'linesmooth'	=> 'lineSmooth',
+		'horizontal'	=> 'horizontalBars',
+		'stack'			=> 'stackBars',
+		'label_offset'	=> 'labelOffset',
+		'chart_padding'	=> 'chartPadding'
 	);
 
 	/**

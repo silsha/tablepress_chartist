@@ -30,6 +30,8 @@ Optional parameters:
 * Enable/disable stacked bars: `stack=true` (default: false)
 * Set chart aspect ratio: `aspect_ratio=3:4` (default: 3:4) Alternatives: 1, 15:16, 8:9, 5:6, 4:5, 3:4, 2:3, 5:8, 1:1.618, 3:5, 9:16, 8:15, 1:2, 2:5, 3:8, 1:3, or 1:4
 * Select chart type: `chart=bar` (default: line) Alternatives: line, bar, pie, donut, percent or piepercent (mix of pie and percent).
+* Set label offset: `label_offset=100` (default: false)
+* Set chart padding: `chart_padding=100` (default: false)
 * Use animations (not available for all chart types): `animation=buildup` (default: false)
 
 If the "Table Head Row" option is enabled for the table, the Extension will use the head row data for the chart labels.
