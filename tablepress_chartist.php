@@ -53,7 +53,8 @@ class TablePress_Chartist {
 		'stack'			=> false,
 		'animation'		=> false,
 		'label_offset'	=> false,
-		'chart_padding'	=> false
+		'chart_padding'	=> false,
+		'donut_width'	=> false
 	);
 
 	/**
@@ -72,7 +73,8 @@ class TablePress_Chartist {
 		'horizontal'	=> 'horizontalBars',
 		'stack'			=> 'stackBars',
 		'label_offset'	=> 'labelOffset',
-		'chart_padding'	=> 'chartPadding'
+		'chart_padding'	=> 'chartPadding',
+		'donut_width'	=> 'donutWidth'
 	);
 
 	/**
@@ -198,7 +200,7 @@ class TablePress_Chartist {
 				break;
 			case 'donut':
 				$chart = 'Pie';
-				$json_chart_options[] = 'labelInterpolationFnc: function( value ) { return value[0]; }';
+				$json_chart_options[] = 'labelInterpolationFnc: function( value ) { return value; }';
 				$json_chart_options[] = 'donut: true';
 				break;
 			case 'percent':
@@ -209,11 +211,18 @@ class TablePress_Chartist {
 				$chart = 'Pie';
 				$json_chart_options[] = "labelInterpolationFnc: function( value, index ) { return value + ' (' + Math.round(data.series[index] / data.series.reduce( sum ) * 100) + '%)';}";
 				break;
+			case 'donutpercent':
+				$chart = 'Pie';
+				$json_chart_options[] = "labelInterpolationFnc: function( value, index ) { return value + ' (' + Math.round(data.series[index] / data.series.reduce( sum ) * 100) + '%)';}";
+				$json_chart_options[] = 'donut: true';
+				break;
 			case 'line':
 			default:
 				$chart = 'Line';
 				break;
 		}
+
+
 
 		// animation frame
 		$animation_script = <<<JS
