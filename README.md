@@ -15,6 +15,7 @@ Add the Shortcode `[table-chart id=123 /]` to a post or page to create a chart f
 * Show/hide show chart area: `showarea=false` (default: false)
 * Set chart y low: `low=0` (default: table low)
 * Set chart y high: `high=10` (default: table high)
+* Set line with of the donut chart: `donut_width=200` (default: false)
 * Enable/disable smooth line: `linesmooth=true` (default: true)
 * Enable/disable line points: `showpoint=true` (default: true)
 * Enable/disable horizontal bars: `horizontal=true` (default: false)
@@ -65,6 +66,7 @@ If you'd like to overide [the default style](http://gionkunz.github.io/chartist-
 1. When the plugin is installed, activate it.
 
 ##Changelog
+* 0.8 Added support for pie charts with percent labels, added animation for bar charts. Added parameters `label_offset`, `chart_padding` and `donut_width`.
 * 0.7 Added support for horizontal bars, stacked bars and donut charts.
 * 0.6 Switch to `[table-chart]` Shortcode.
 * 0.5.1 Revert to PHP json_encode().

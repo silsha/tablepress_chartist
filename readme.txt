@@ -1,10 +1,10 @@
 === TablePress Extension: Chartist ===
-Contributors: PerS, silsha
-Donate link: http://soderlind.no/donate/
+Contributors: silsha, PerS
+Donate link: https://sharethemeal.org/en/index.html
 Tags: tablepress, table, chart, responsive
 Requires at least: 4.3
-Tested up to: 4.7.1
-Stable tag: 0.7
+Tested up to: 4.7.2
+Stable tag: 0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,6 +24,7 @@ Optional parameters:
 * Show/hide show chart area: `showarea=false` (default: false)
 * Set chart y low: `low=0` (default: table low)
 * Set chart y high: `high=10` (default: table high)
+* Set line with of the donut chart: `donut_width=200` (default: false)
 * Enable/disable smooth line: `linesmooth=true` (default: true)
 * Enable/disable line points: `showpoint=true` (default: true)
 * Enable/disable horizontal bars: `horizontal=true` (default: false)
@@ -86,6 +87,10 @@ Prerequisite (install first): The [TablePress](https://wordpress.org/plugins/tab
 9. `[table-chart id=1 chart=percent /]`
 
 == Changelog ==
+= 0.8 =
+* Added support for pie charts with percent labels
+* Added animation for bar charts.
+* Added parameters `label_offset`, `chart_padding` and `donut_width`.
 = 0.7 =
 * Added support for horizontal bars (`horizontal=true`)
 * Added support for stacked bars (`stack=true`)
