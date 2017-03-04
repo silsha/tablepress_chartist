@@ -120,7 +120,7 @@ class TablePress_Chartist
         add_filter('tablepress_shortcode_table_default_shortcode_atts', [__CLASS__, 'register_shortcode_attributes']);
         add_filter('tablepress_table_output', [__CLASS__, 'generate_chart'], 10, 3);
         add_shortcode('table-chart', [__CLASS__, 'handle_table_chart_shortcode']);
-        add_action ('admin_head', [__CLASS__, 'handle_tablepress_chartist_editor_button']);
+        add_action('admin_head', [__CLASS__, 'handle_tablepress_chartist_editor_button']);
     }
 
     /**
@@ -381,45 +381,49 @@ JS;
         }
     }
 
-        /**
-     * Handles TablePress Chartist button in tinymce editor
+    /**
+     * Handles TablePress Chartist button in tinymce editor.
      *
      * @since 0.9
      */
-    public static function handle_tablepress_chartist_editor_button() {
+    public static function handle_tablepress_chartist_editor_button()
+    {
         global $typenow;
-        if ( !current_user_can('edit_posts') && !current_user_can('edit_pages') ) {
+        if (!current_user_can('edit_posts') && !current_user_can('edit_pages')) {
             return;
         }
 
-        if( ! in_array( $typenow, array( 'post', 'page' ) ) ) {
+        if (!in_array($typenow, ['post', 'page'])) {
             return;
         }
 
-
-        if ( get_user_option('rich_editing') == 'true') {
-            add_filter("mce_external_plugins", array( __CLASS__, "add_tablepress_chartist_tinymce_plugin" ) );
-            add_filter('mce_buttons', array( __CLASS__, 'register_tablepress_chartist_button') );
+        if (get_user_option('rich_editing') == 'true') {
+            add_filter('mce_external_plugins', [__CLASS__, 'add_tablepress_chartist_tinymce_plugin']);
+            add_filter('mce_buttons', [__CLASS__, 'register_tablepress_chartist_button']);
         }
     }
 
     /**
-     * Adds javascript for tinymce editor
+     * Adds javascript for tinymce editor.
      *
      * @since 0.9
      */
-    public static function add_tablepress_chartist_tinymce_plugin($plugin_array) {
-        $plugin_array['tablepress_chartist_button'] = plugins_url( '/tablepress-chartist-editor.js', __FILE__ );
+    public static function add_tablepress_chartist_tinymce_plugin($plugin_array)
+    {
+        $plugin_array['tablepress_chartist_button'] = plugins_url('/tablepress-chartist-editor.js', __FILE__);
+
         return $plugin_array;
     }
 
     /**
-     * Adds button to the tinymce editor
+     * Adds button to the tinymce editor.
      *
      * @since 0.9
      */
-    public static function register_tablepress_chartist_button($buttons) {
-        array_push($buttons, "tablepress_chartist_button");
+    public static function register_tablepress_chartist_button($buttons)
+    {
+        array_push($buttons, 'tablepress_chartist_button');
+
         return $buttons;
     }
 } // class TablePress_Chartist
