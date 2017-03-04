@@ -152,17 +152,18 @@ class TablePress_Chartist
     /**
      * Load Chartist JavaScript and CSS files.
      *
-     * @TODO: Only load the JavaScript file if there is a chart on the page.
-     *
      * @since 0.1
      */
     public static function enqueue_scripts_styles()
     {
-        $dir = plugin_dir_url(__FILE__);
-        wp_enqueue_script('chartist-js', $dir.'libdist/chartist.min.js', ['jquery'], self::$version, true);
-        wp_enqueue_style('chartist-css', $dir.'libdist/chartist.min.css', [], self::$version);
-        if (file_exists(WP_CONTENT_DIR.'/tablepress-chartist-custom.css')) {
-            wp_enqueue_style('chartist-custom-css', content_url('tablepress-chartist-custom.css'), ['chartist-css'], self::$version);
+        global $post;
+        if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'table-chart')) {
+            $dir = plugin_dir_url(__FILE__);
+            wp_enqueue_script('chartist-js', $dir.'libdist/chartist.min.js', ['jquery'], self::$version, true);
+            wp_enqueue_style('chartist-css', $dir.'libdist/chartist.min.css', [], self::$version);
+            if (file_exists(WP_CONTENT_DIR.'/tablepress-chartist-custom.css')) {
+                wp_enqueue_style('chartist-custom-css', content_url('tablepress-chartist-custom.css'), ['chartist-css'], self::$version);
+            }
         }
     }
 
