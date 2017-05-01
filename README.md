@@ -66,6 +66,7 @@ If you'd like to overide [the default style](http://gionkunz.github.io/chartist-
 1. When the plugin is installed, activate it.
 
 ##Changelog
+* 0.9 Updated chartist.js to 0.11.0
 * 0.8 Added support for pie charts with percent labels, added animation for bar charts. Added parameters `label_offset`, `chart_padding` and `donut_width`.
 * 0.7 Added support for horizontal bars, stacked bars and donut charts.
 * 0.6 Switch to `[table-chart]` Shortcode.
