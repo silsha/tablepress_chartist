@@ -4,7 +4,7 @@ Donate link: https://sharethemeal.org/en/index.html
 Tags: tablepress, table, chart, responsive
 Requires at least: 5.9
 Tested up to: 5.9.3
-Stable tag: 0.10
+Stable tag: 0.10.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
