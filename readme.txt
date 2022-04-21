@@ -2,9 +2,9 @@
 Contributors: silsha, PerS
 Donate link: https://sharethemeal.org/en/index.html
 Tags: tablepress, table, chart, responsive
-Requires at least: 4.7
-Tested up to: 4.9
-Stable tag: 0.9
+Requires at least: 5.9
+Tested up to: 5.9.3
+Stable tag: 0.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,8 @@ Prerequisite (install first): The [TablePress](https://wordpress.org/plugins/tab
 9. `[table-chart id=1 chart=percent /]`
 
 == Changelog ==
+= 0.10 =
+* Fixed error when opening the page in the backend. (Thanks to [andrewleonard](https://wordpress.org/support/topic/problems-with-chartist-plugin/))
 = 0.9 =
 * Updated chartist.js to 0.11.0
 = 0.8 =

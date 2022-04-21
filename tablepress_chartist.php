@@ -3,7 +3,7 @@
 Plugin Name: TablePress Extension: Chartist
 Plugin URI: https://github.com/silsha/tablepress_chartist
 Description: Extension for TablePress to create a responsive chart based on the data in a TablePress table.
-Version: 0.9
+Version: 0.10
 Author: Silsha Fux
 Author URI: https://silsha.me
 License: GPL
@@ -119,7 +119,11 @@ class TablePress_Chartist
         add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_scripts_styles']);
         add_filter('tablepress_shortcode_table_default_shortcode_atts', [__CLASS__, 'register_shortcode_attributes']);
         add_filter('tablepress_table_output', [__CLASS__, 'generate_chart'], 10, 3);
-        add_shortcode('table-chart', [__CLASS__, 'handle_table_chart_shortcode']);
+        if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+            // TablePress doesn't support the REST API
+        } else {
+            add_shortcode('table-chart', [__CLASS__, 'handle_table_chart_shortcode']);
+        }
     }
 
     /**
@@ -146,7 +150,10 @@ class TablePress_Chartist
             $table_query[$attribute] = $value;
         }
 
-        return tablepress_get_table($table_query);
+        if ( function_exists( 'tablepress_get_table' )) {
+            return tablepress_get_table($table_query);
+        }
+        return false;
     }
 
     /**
