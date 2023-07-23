@@ -1,4 +1,4 @@
-# TablePress Extension: Chartist
+# TablePress Extension: Chartist + Tooltip
 
 ![Sample chart](wp-assets/screenshot-1.jpg)
 
