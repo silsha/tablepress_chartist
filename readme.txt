@@ -8,7 +8,7 @@ Stable tag: 0.10.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Create a responsive chart based on the data in a TablePress table.
+Create a responsive chart + [ chartist tooltip plugin ] based on the data in a TablePress table.
 
 == Description ==
 
