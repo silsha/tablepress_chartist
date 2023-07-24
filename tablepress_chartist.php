@@ -228,9 +228,9 @@ class TablePress_Chartist
             $json_chart_options[] = 'donut: true';
             break;
         case 'percent':
-            $chart = 'Pie';
-            $json_chart_options[] = "labelInterpolationFnc: function( value ) { return Math.round( value / data.series.reduce( sum ) * 100 ) + '%'; }";
-            break;
+        $chart = 'Pie';
+        $json_chart_options[] = "labelInterpolationFnc: function( value ) { return value == 0 ? 'waiting for data...' : Math.round( value / data.series.reduce( sum ) * 100 ) + '%'; }";
+        break;
         case 'piepercent':
             $chart = 'Pie';
             $json_chart_options[] = "labelInterpolationFnc: function( value, index ) { return value + ' (' + Math.round(data.series[index] / data.series.reduce( sum ) * 100) + '%)';}";
@@ -319,7 +319,8 @@ JS;
     if ('Pie' === $chart) {
         $table['data'] = array_shift($table['data']);
     }
-
+	
+	
     $json_chart_data = [
         'series' => $table['data'],
     ];
