@@ -1,4 +1,6 @@
-# TablePress Extension: Chartist + Tooltip
+# TablePress Extension: Chartist + [ Tooltip implementation fork ]
+
+idk how to go about from here i just bullied gpt4 until everything worked and i want silsha to implement this to the main.
 
 ![Sample chart](wp-assets/screenshot-1.jpg)
 
