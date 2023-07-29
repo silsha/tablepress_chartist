@@ -211,7 +211,15 @@ class TablePress_Chartist
     if (!$render_options['chartist']) {
         return $output;
     }
-
+	
+	// Calculate the sum of all values
+$sum = 0;
+foreach ($table['data'] as $row) {
+    foreach ($row as $value) {
+        $sum += $value;
+    }
+}	
+		
     $json_chart_options = [];
 
     switch (strtolower($render_options['chartist_chart'])) {
@@ -229,7 +237,12 @@ class TablePress_Chartist
             break;
         case 'percent':
         $chart = 'Pie';
-        $json_chart_options[] = "labelInterpolationFnc: function( value ) { return value == 0 ? 'waiting for data...' : Math.round( value / data.series.reduce( sum ) * 100 ) + '%'; }";
+        // Modify the labelInterpolationFnc based on the sum
+if ($sum == 0) {
+    $json_chart_options[] = "labelInterpolationFnc: function( value ) { return 'waiting for data...'; }";
+} else {
+    $json_chart_options[] = "labelInterpolationFnc: function( value ) { return Math.round( value / data.series.reduce( sum ) * 100 ) + '%'; }";
+}
         break;
         case 'piepercent':
             $chart = 'Pie';
@@ -325,10 +338,16 @@ JS;
         'series' => $table['data'],
     ];
     if ($render_options['table_head'] && 'percent' !== $render_options['chartist_chart']) {
-        $json_chart_data['labels'] = $json_labels;
+    // Create a new array for the truncated labels
+    $truncated_labels = [];
+    foreach($json_labels as $label) {
+        $truncated_labels[] = substr($label, 0, 2);
     }
+    $json_chart_data['labels'] = $truncated_labels;  // Use the truncated labels for the x-axis
+}
 
-    $json_chart_data = json_encode((object) $json_chart_data);
+$json_chart_data = json_encode((object) $json_chart_data);
+$json_labels = json_encode($json_labels);  // Still use the full labels for the tooltips
 
     foreach (self::$attribute_to_js_mapping as $option_key => $option_js) {
         $option_key = 'chartist_'.$option_key;
@@ -337,7 +356,15 @@ JS;
             $json_chart_options[] = $option_js.': '.json_encode($value);
         }
     }
-
+		
+if ($chart !== 'Pie') {
+    $padding_top = 0;
+    $padding_right = 0;
+    $padding_bottom = 40;
+    $padding_left = 0;
+    $json_chart_options[] = 'chartPadding: { top: '.$padding_top.', right: '.$padding_right.', bottom: '.$padding_bottom.', left: '.$padding_left.' }';
+}
+	
     // Find the maximum value in the table data
     $maxVal = 0;
     foreach ($table['data'] as $row) {
@@ -365,21 +392,36 @@ JS;
 <script type="text/javascript">
 jQuery(document).ready(function(){
 	var	data = {$json_chart_data},
+	 labels = {$json_labels},
 		options = {$json_chart_options},
 		sum = function( a, b ) { return a + b; };
 	var chart = new Chartist.{$chart}( '#chartist-{$render_options['html_id']}', data, options );
+	var animation_option = "{$render_options['chartist_animation']}";
 	chart.on('draw', function(data) {
-    if(data.type === 'line' || data.type === 'area') {
-        data.element.animate({
-            d: {
-                begin: 1500 * data.index,
-                dur: 1500,
-                from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-                to: data.path.clone().stringify(),
-                easing: Chartist.Svg.Easing.easeOutQuint
-            }
-        });
-    }
+    if(data.type === 'line') {
+    data.element.animate({
+        opacity: {
+            begin: 0,
+            dur: 50,
+            from: 0,
+            to: 1,
+            easing: Chartist.Svg.Easing.easeInQuint
+        }
+    });
+} 
+else if (data.type === 'point') {
+    data.element.animate({
+        opacity: {
+            begin: 0,
+            dur: 50, 
+            from: 0,
+            to: 1,
+            easing: Chartist.Svg.Easing.easeInQuint
+        }
+    });
+}
+
+
     if (data.type === 'bar') {
         data.element.attr({
             style: 'stroke-width: 0px'
@@ -419,7 +461,7 @@ jQuery(document).ready(function(){
         tooltip.style.transition = 'opacity 0.3s ease-in-out';
 
         tooltip.style.opacity = 1;
-        tooltip.textContent = data.value.y !== undefined ? data.value.y : (data.value.x !== undefined ? data.value.x : data.value);
+        tooltip.innerHTML = labels[data.index] + '<br>' + data.value.y;
 
         data.element._node.tooltip = tooltip;
     };
